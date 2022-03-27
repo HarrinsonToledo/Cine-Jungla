@@ -3,7 +3,7 @@ package app.java.cinejungla;
 public class Comands {
 
     public static Comands instance;
-    public int comando_multiplex;
+    public int comando_multiplex = 1;
 
     public Comands() {
 

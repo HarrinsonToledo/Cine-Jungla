@@ -27,7 +27,7 @@
             texto = "embajador";
             break;
         case 6:
-            texto = "las americas";
+            texto = "las americas   ";
             break;
     }
 %>

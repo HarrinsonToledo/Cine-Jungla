@@ -3,11 +3,7 @@ html{
     height: 100%;
 }
 
-#acceso{
-    display: flex;
-}
-
-#acceso, #index {
+body{
     font-family: 'Open Sans', sans-serif;
 
     background-image: url("https://img.freepik.com/foto-gratis/disposicion-elementos-cine-sobre-fondo-rojo-espacio-copia_23-2148457847.jpg");
@@ -22,14 +18,11 @@ html{
 
 .contenedor{
     margin: auto;
+
     width: 70%;
     height: 50%;
 }
 
-.card{
-    margin-right: 10%;
-    margin-left: 10%;
-}
 #main-container{
     height: 90%;
     background-color: white;
@@ -53,8 +46,7 @@ button{
 }
 
 .card{
-    margin: auto; !important;
-    margin-bottom: 2%;
+    margin: auto;
 }
 
 .card-img-top{
