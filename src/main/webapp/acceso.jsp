@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<body>
+<body id="acceso">
 <div id="empleado" class="card" style="width: 18rem;">
     <img src="https://us.123rf.com/450wm/ahasoft2000/ahasoft20001607/ahasoft2000160700035/60449629-icono-del-personal-estilo-vector-es-s%C3%ADmbolo-ic%C3%B3nico-plana-con-%C3%A1ngulos-redondeados-de-color-gris-fond.jpg?ver=6" class="card-img-top" alt="...">
     <div class="card-body">

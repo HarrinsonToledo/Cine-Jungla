@@ -3,7 +3,11 @@ html{
     height: 100%;
 }
 
-body {
+#acceso{
+    display: flex;
+}
+
+#acceso, #index {
     font-family: 'Open Sans', sans-serif;
 
     background-image: url("https://img.freepik.com/foto-gratis/disposicion-elementos-cine-sobre-fondo-rojo-espacio-copia_23-2148457847.jpg");
@@ -28,10 +32,69 @@ body {
 }
 #main-container{
     height: 90%;
-}
-#nav-bar{
-    width: 100%;
-    align-content: last;
+    background-color: white;
+
 }
 
+form{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+
+#nav-bar{
+    width: 100%;
+}
+
+button{
+    text-decoration: none;
+    border: none;
+    text-align: center;
+}
+
+.card{
+    margin: auto; !important;
+    margin-bottom: 2%;
+}
+
+.card-img-top{
+    width: 100%; !important;
+    height: 280px; !important;
+}
+
+.title{
+    text-align: center;
+    grid-column: 1 / span 3;
+    grid-row: 1;
+}
+
+#titan{
+    grid-column: 1;
+    grid-row: 1;
+}
+
+#unicentro{
+    grid-column: 2;
+    grid-row: 1;
+}
+
+#plaza-central{
+    grid-column: 3;
+    grid-row: 1;
+}
+
+#gran-estacion {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+#embajador{
+    grid-column: 2;
+    grid-row: 2;
+}
+
+#las-americas{
+    grid-column: 3;
+    grid-row: 2;
+}
 
