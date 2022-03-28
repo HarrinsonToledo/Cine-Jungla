@@ -44,7 +44,7 @@
                     </div>
                 </div>
             </button>
-            <button id="gran-estacion" type="submit" name="boton" value="gran-estacion">
+            <button id="gran-estacion" type="submit" name="boton" value="graan-estacion">
                 <div class="card" style="width: 25em; margin-bottom: 2%;">
                     <img class="card-img-top" src="http://4.bp.blogspot.com/-lm_SKduB5cU/U_-CIroziKI/AAAAAAAAGKA/RZr7xNipvGQ/s1600/Gran-Estaci%C3%B3n-Bogot%C3%A1.jpg" alt="Card image cap">
                     <div class="card-body">
