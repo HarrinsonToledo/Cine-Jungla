@@ -14,7 +14,7 @@ public class Connect {
     String bd = "cine_jungla";
     String url = "jdbc:mysql://localhost:3306/"+bd+"?useTimeZone=true&serverTimezone=UTC&autoReconnect=true&useSSL=false";
     String user = "root";
-    String password = "mysqlrooter";
+    String password = "";//ponen su contraseña de mysql aqui
 
     public Connect() {
 
