@@ -6,6 +6,7 @@ html{
 body{
     font-family: 'Open Sans', sans-serif;
 
+    background-color: #D72518;
     background-image: url("https://img.freepik.com/foto-gratis/disposicion-elementos-cine-sobre-fondo-rojo-espacio-copia_23-2148457847.jpg");
     background-repeat: no-repeat;
     background-attachment: scroll;
@@ -24,20 +25,10 @@ body{
     height: 50%;
 }
 
-#main-container{
-    height: 90%;
-    background-color: white;
-
-}
-
 form{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
-}
-
-#nav-bar{
-    width: 100%;
 }
 
 button{

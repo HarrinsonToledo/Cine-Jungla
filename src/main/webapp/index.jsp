@@ -13,7 +13,8 @@
 </head>
 <body>
     <nav class="navbar navbar-dark bg-dark mb-0 px-5" id="nav-bar">
-        <a href="#"><h1 style="color: white"><b>Cine jungla</b></h1></a>
+        <img src="recursos/solo-logo.png" width="100">
+        <a href="#" style="margin-right: auto"><h2 style="color: white"><b>Cine jungla</b></h2></a>
         <a href="acceso.jsp"><button class="btn btn-danger my-2 my-sm-0" type="submit">Acceder</button></a>
     </nav>
     <div id="main-container" class="container">
