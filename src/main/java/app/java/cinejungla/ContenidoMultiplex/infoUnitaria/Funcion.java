@@ -1,15 +1,24 @@
-package app.java.cinejungla.ContenidoMultiplex.Funciones;
+package app.java.cinejungla.ContenidoMultiplex.infoUnitaria;
 
 public class Funcion {
 
-    String Nom_pelicula;
-    String Cod_sala;
-    String imagen;
-    String dia;
-    String Hora;
+    private int id_funcion;
+    private String Nom_pelicula;
+    private String Cod_sala;
+    private String imagen;
+    private String dia;
+    private String Hora;
 
     public Funcion() {
 
+    }
+
+    public int getId_funcion() {
+        return id_funcion;
+    }
+
+    public void setId_funcion(int id_funcion) {
+        this.id_funcion = id_funcion;
     }
 
     public String getNom_pelicula() {

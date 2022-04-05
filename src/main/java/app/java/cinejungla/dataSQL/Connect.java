@@ -14,7 +14,7 @@ public class Connect {
     String bd = "cine_jungla";
     String url = "jdbc:mysql://localhost:3306/"+bd+"?useTimeZone=true&serverTimezone=UTC&autoReconnect=true&useSSL=false";
     String user = "root";
-    String password = "";//ponen su contraseña de mysql aqui
+    String password = "mysqlrooter";//ponen su contraseña de mysql aqui
 
     public Connect() {
 
@@ -26,7 +26,6 @@ public class Connect {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(url,user, password);
-            Statement statement = connection.createStatement();
 
             return connection;
 

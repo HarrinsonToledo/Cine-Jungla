@@ -35,6 +35,12 @@ button{
     text-decoration: none;
     border: none;
     text-align: center;
+    background-color: white;
+}
+
+#main-container{
+    height: 90%;
+    background-color: white;
 }
 
 .card{

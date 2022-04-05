@@ -1,5 +1,5 @@
 <%@ page import="app.java.cinejungla.Comands" %>
-<%@ page import="app.java.cinejungla.ContenidoMultiplex.Funciones.Funcion" %>
+<%@ page import="app.java.cinejungla.ContenidoMultiplex.infoUnitaria.Funcion" %>
 <%@ page import="app.java.cinejungla.ContenidoMultiplex.PuntosCineJungla" %>
 <%@ page import="app.java.cinejungla.ContenidoMultiplex.MultiplexBuilder" %>
 <%@ page import="app.java.cinejungla.ContenidoMultiplex.PuntoAgil.*" %>
@@ -16,7 +16,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     Comands comando = Comands.getInstance();
-    PuntosCineJungla puntoCJ = new PuntosCineJungla();
+    PuntosCineJungla puntoCJ = PuntosCineJungla.getInstance();
     String texto = "";
 
     ArrayList<String> imprimir = new ArrayList<>();
@@ -58,13 +58,15 @@
 
     for (Funcion peli: puntoCJ.getMultplex().obtener()) {
          imprimir.add("<div class=\"col-sm-3 d-flex justify-content-center\">\n" +
-                 "            <div class=\"card\">\n" +
-                 "                <img class=\"card-img-top img-peliculas\" src=\"" + peli.getImagen() + "\" alt=\"Card image cap\">\n" +
-                 "                <div class=\"card-body\">\n" +
-                 "                    <p class=\"card-text\">"+ peli.getNom_pelicula() + "</p>\n" +
-                 "                </div>\n" +
-                 "            </div>\n" +
-                 "            </div>");
+                 "        <button name=\"boton-peli\" type=\"submit\" value=\""+ peli.getNom_pelicula() + "\">\n" +
+                 "                        <div class=\"card\">\n" +
+                 "                            <img class=\"card-img-top img-peliculas\" src=\"" + peli.getImagen() +  "\" alt=\"Card image cap\"> \n" +
+                 "                            <div class=\"card-body\">\n" +
+                 "                                <p class=\"card-text\">" + peli.getNom_pelicula() + "</p>\n" +
+                 "                            </div>\n" +
+                 "                        </div>\n" +
+                 "         </button>\n" +
+                 "      </div>");
     }
 
     Set<String> hashSet = new HashSet<String>(imprimir);
@@ -84,19 +86,21 @@
 <body>
     <nav class="navbar navbar-dark bg-dark mb-0 px-5" id="nav-bar">
         <img src="recursos/solo-logo.png" width="100">
-        <a href="#" style="margin-right: auto"><h2 style="color: white"><b>Cine jungla</b></h2></a>
+        <a href="#" style="margin-right: auto"><h2 style="color: white"><b>Cine Jungla</b></h2></a>
         <a href="acceso.jsp"><button class="btn btn-danger my-2 my-sm-0" type="submit">Acceder</button></a>
     </nav>
     <div id="main-container" class="container">
         <h2 class="title mb-3"><b>Multiplex <%= texto%> </b></h2>
-        <div class="row">
+        <form action="hello-servlet" class="row">
             <%
                 for (String txt : imprimir) {
                     out.print(txt);
                 }
             %>
-        </div>
-
+        </form>
     </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

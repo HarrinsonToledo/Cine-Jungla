@@ -18,19 +18,13 @@ body{
     align-items: center;
 }
 
-h2{
-    text-align: center;
-}
-
-button{
-    text-decoration: none;
-    border: none;
-    text-align: center;
-    background-color: white;
+.row{
+    padding-top: 5%;
 }
 
 #main-container{
-    height: 90%;
+    margin-top: 1%;
+    height: 85%;
     background-color: white;
 }
 
@@ -41,3 +35,13 @@ button{
 a{
     text-decoration: none;
 }
+
+.img-pelicula{
+    max-width: inherit;
+    max-height: inherit;
+}
+.wrap-img{
+    height: 60vh;
+    max-width: inherit;
+}
+

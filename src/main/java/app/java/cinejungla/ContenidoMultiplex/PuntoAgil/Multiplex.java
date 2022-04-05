@@ -1,9 +1,8 @@
 package app.java.cinejungla.ContenidoMultiplex.PuntoAgil;
 
-import app.java.cinejungla.ContenidoMultiplex.Funciones.Funcion;
+import app.java.cinejungla.ContenidoMultiplex.infoUnitaria.Funcion;
 import app.java.cinejungla.dataSQL.Connect;
 
-import javax.swing.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -25,11 +24,12 @@ public class Multiplex {
             connection = conexion.conectar();
             Statement statement = connection.createStatement();
 
-            ResultSet resultSet = statement.executeQuery("select f.DIA, f.HORA, p.NOM_PELICULA, p.IMAGEN, s.CODIGO from funcion as f inner join salas as s on s.ID_SALA = f.ID_SALA and f.ID_MULTIPLEX = " + multiplex +" inner join peliculas as p on p.ID_PELICULA = f.ID_PELICULA and f.ID_MULTIPLEX = " + multiplex);
+            ResultSet resultSet = statement.executeQuery("select f.ID_FUNCION, f.HORA, f.DIA, p.NOM_PELICULA, p.IMAGEN, s.CODIGO from funcion as f inner join salas as s on s.ID_SALA = f.ID_SALA and f.ID_MULTIPLEX = " + multiplex +" inner join peliculas as p on p.ID_PELICULA = f.ID_PELICULA and f.ID_MULTIPLEX = " + multiplex);
 
             while (resultSet.next()) {
                 Funcion act_funcion = new Funcion();
 
+                act_funcion.setId_funcion(resultSet.getInt("ID_FUNCION"));
                 act_funcion.setDia(resultSet.getString("DIA"));
                 act_funcion.setHora(resultSet.getString("HORA"));
                 act_funcion.setImagen(resultSet.getString("IMAGEN"));
