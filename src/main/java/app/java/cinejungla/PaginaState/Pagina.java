@@ -8,6 +8,10 @@ public class Pagina {
         actualState = state;
     }
 
+    public State getActualState() {
+        return actualState;
+    }
+
     public String getPagina() {
         return actualState.cambiarPagina();
     }

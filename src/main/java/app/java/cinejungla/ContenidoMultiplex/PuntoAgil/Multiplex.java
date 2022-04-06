@@ -19,8 +19,10 @@ public class Multiplex {
     }
 
     public  void registrar(int multiplex) {
+        if (contenido != null) {
+            contenido.clear();
+        }
         try {
-
             connection = conexion.conectar();
             Statement statement = connection.createStatement();
 

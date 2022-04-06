@@ -2,7 +2,10 @@
 <%@ page import="app.java.cinejungla.ContenidoMultiplex.infoUnitaria.Pelicula.SelectPelicula" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.HashSet" %>
-<%@ page import="java.util.Set" %><%--
+<%@ page import="java.util.Set" %>
+<%@ page import="app.java.cinejungla.Comands" %>
+<%@ page import="app.java.cinejungla.infoPersona.Usuarios.SelectUsuario" %>
+<%@ page import="app.java.cinejungla.infoPersona.Clientes.SelectCliente" %><%--
   Created by IntelliJ IDEA.
   User: ADMIN
   Date: 4/4/2022
@@ -21,6 +24,17 @@
     Set<String> hashSet = new HashSet<String>(fechas);
     fechas.clear();
     fechas.addAll(hashSet);
+
+    String[] nombre = null;
+    Comands login = Comands.getInstance();
+    SelectUsuario usuario = SelectUsuario.getInstance();
+    SelectCliente cliente = SelectCliente.getInstance();
+
+    if (login.getPersona_logueada() == 1) {
+        nombre = usuario.getNombre().split(" ");
+    } else if (login.getPersona_logueada() == 2) {
+        nombre = cliente.getNombre().split(" ");
+    }
 %>
 
 <html>
@@ -29,14 +43,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="Estilos/pelicula-style.css">
+    <link rel="stylesheet" href="EstilosGeneral/pelicula-style.css">
     <title>Pelicula - Cine Jungla</title>
 </head>
 <body>
     <nav class="navbar navbar-dark bg-dark mb-0 px-5" id="nav-bar">
         <img src="recursos/solo-logo.png" width="100">
-        <a href="#" style="margin-right: auto"><h2 style="color: white"><b>Cine Jungla</b></h2></a>
-        <a href="acceso.jsp"><button class="btn btn-danger my-2 my-sm-0" type="submit">Acceder</button></a>
+        <a href="<%if (login.getPersona_logueada() == 2) {out.print("index.jsp");} else {out.print("#");}%>" style="margin-right: auto"><h2 style="color: white"><b>Cine Jungla</b></h2></a>
+        <a href="acceso.jsp"><button class="btn btn-danger my-2 my-sm-0" type="submit" <% if (login.getPersona_logueada() != 0) {out.print("style=\"display: none\"");}%>>Acceder</button></a>
+        <img class="user" id="user" src="recursos/social-media.gif" width="50">
+        <h4 class="user" style="color: white;"> <% if (nombre != null) { out.print(nombre[0]); }%> </h4>
     </nav>
     <div id="main-container" class="container">
         <div class="row">
@@ -97,7 +113,11 @@
         </div>
     </div>
     </div>
-
+    <style>
+        .user{
+        <% if (login.getPersona_logueada() != 2 && login.getPersona_logueada() != 1) {out.print("display: none");}%>
+        }
+    </style>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

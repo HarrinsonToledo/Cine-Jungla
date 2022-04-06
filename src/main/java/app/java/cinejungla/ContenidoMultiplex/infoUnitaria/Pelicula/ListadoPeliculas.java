@@ -20,6 +20,9 @@ public class ListadoPeliculas {
     }
 
     public ArrayList<Pelicula> getPeliculas() {
+        if (listado != null) {
+            listado.clear();
+        }
         try {
             connection = conexion.conectar();
             Statement statement = connection.createStatement();

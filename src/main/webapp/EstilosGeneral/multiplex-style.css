@@ -22,6 +22,16 @@ h2{
     text-align: center;
 }
 
+#user{
+    border-radius:80%;
+}
+
+h4{
+    margin-left:1%;
+    margin-top:auto;
+    margin-bottom:auto;
+}
+
 button{
     text-decoration: none;
     border: none;

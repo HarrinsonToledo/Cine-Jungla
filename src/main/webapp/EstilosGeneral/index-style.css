@@ -25,6 +25,16 @@ body{
     height: 50%;
 }
 
+#user{
+    border-radius:80%;
+}
+
+h4{
+    margin-left:1%;
+    margin-top:auto;
+    margin-bottom:auto;
+}
+
 form{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -58,32 +68,32 @@ button{
     grid-row: 1;
 }
 
-#titan{
+#Titan{
     grid-column: 1;
     grid-row: 1;
 }
 
-#unicentro{
+#Unicentro{
     grid-column: 2;
     grid-row: 1;
 }
 
-#plaza-central{
+#Plaza\ Central{
     grid-column: 3;
     grid-row: 1;
 }
 
-#gran-estacion {
+#Gran\ Estacion {
     grid-column: 1;
     grid-row: 2;
 }
 
-#embajador{
+#Embajador{
     grid-column: 2;
     grid-row: 2;
 }
 
-#las-americas{
+#Las\ Americas{
     grid-column: 3;
     grid-row: 2;
 }

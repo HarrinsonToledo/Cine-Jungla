@@ -18,6 +18,16 @@ body{
     align-items: center;
 }
 
+#user{
+    border-radius:80%;
+}
+
+h4{
+    margin-left:1%;
+    margin-top:auto;
+    margin-bottom:auto;
+}
+
 .row{
     padding-top: 5%;
 }
