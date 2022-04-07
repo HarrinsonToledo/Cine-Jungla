@@ -1,13 +1,7 @@
 <component name="ArtifactManager">
   <artifact type="war" name="Cine Jungla:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <properties id="maven-jee-properties">
-      <options>
-        <module>Cine Jungla</module>
-        <packaging>war</packaging>
-      </options>
-    </properties>
-    <root id="archive" name="Cine-Jungla-1.0-SNAPSHOT.war">
+    <output-path>$PROJECT_DIR$/out/artifacts/Cine_Jungla_war</output-path>
+    <root id="archive" name="Cine Jungla_war.war">
       <element id="artifact" artifact-name="Cine Jungla:war exploded" />
     </root>
   </artifact>

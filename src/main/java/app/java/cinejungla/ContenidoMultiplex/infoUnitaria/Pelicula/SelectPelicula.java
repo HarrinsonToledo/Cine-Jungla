@@ -6,7 +6,8 @@ import java.util.ArrayList;
 
 public class SelectPelicula extends Pelicula{
     private static SelectPelicula instance;
-    public ArrayList<Funcion> funcionesPeli = new ArrayList<>();
+    private Funcion selectFuncion;
+    private ArrayList<Funcion> funcionesPeli = new ArrayList<>();
 
     public SelectPelicula() {
 
@@ -24,6 +25,15 @@ public class SelectPelicula extends Pelicula{
             }
         }
     }
+
+    public Funcion getSelectFuncion() {
+        return selectFuncion;
+    }
+
+    public void setSelectFuncion(Funcion selectFuncion) {
+        this.selectFuncion = selectFuncion;
+    }
+
     public static SelectPelicula getInstance() {
         if (instance == null) {
             instance = new SelectPelicula();

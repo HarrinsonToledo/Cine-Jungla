@@ -103,6 +103,9 @@
         <a href="acceso.jsp"><button class="btn btn-danger my-2 my-sm-0" type="submit" <% if (login.getPersona_logueada() != 0) {out.print("style=\"display: none\"");}%>>Acceder</button></a>
         <img class="user" id="user" src="recursos/social-media.gif" width="50">
         <h4 class="user" style="color: white;"> <% if (nombre != null) { out.print(nombre[0]); }%> </h4>
+        <form class="cerrarSesion" action="hello-servlet">
+            <button name="cerrar-sesion" id="cerrar" value="cerrar" class="btn btn-danger my-2 my-sm-0" type="submit">Cerrar Sesion</button>
+        </form>
     </nav>
     <div id="main-container" class="container">
         <h2 class="title mb-3"><b>Multiplex <%= texto%> </b></h2>
@@ -116,6 +119,9 @@
     </div>
     <style>
         .user{
+        <% if (login.getPersona_logueada() != 2 && login.getPersona_logueada() != 1) {out.print("display: none");}%>
+        }
+        #cerrar{
         <% if (login.getPersona_logueada() != 2 && login.getPersona_logueada() != 1) {out.print("display: none");}%>
         }
     </style>

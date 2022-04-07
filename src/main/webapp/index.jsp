@@ -14,6 +14,8 @@
     } else if (login.getPersona_logueada() == 2) {
         nombre = cliente.getNombre().split(" ");
     }
+
+
 %>
 <!DOCTYPE html>
 <html>
@@ -33,11 +35,14 @@
         <a href="acceso.jsp"><button class="btn btn-danger my-2 my-sm-0" type="submit" <% if (login.getPersona_logueada() != 0) {out.print("style=\"display: none\"");}%>>Acceder</button></a>
         <img class="user" id="user" src="recursos/social-media.gif" width="50">
         <h4 class="user" style="color: white;"> <% if (nombre != null) { out.print(nombre[0]); }%> </h4>
+        <form class="cerrarSesion" action="hello-servlet">
+            <button name="cerrar-sesion" id="cerrar" value="cerrar" class="btn btn-danger my-2 my-sm-0" type="submit">Cerrar Sesion</button>
+        </form>
     </nav>
     <div id="main-container" class="container">
         <h2 class="title"><b>Puntos Multiplex</b></h2>
 
-        <form action="hello-servlet">
+        <form class="multiplex" action="hello-servlet">
             <button id="Titan" type="submit" name="boton" value="Titan">
                 <div class="card" style="width: 25em; margin-bottom: 2%;">
                     <img class="card-img-top img-cines" src="https://img.lalr.co/cms/2020/08/25110421/TITAN2.jpg" alt="Card image cap">
@@ -90,6 +95,10 @@
     </div>
     <style>
         .user{
+            <% if (login.getPersona_logueada() != 2 && login.getPersona_logueada() != 1) {out.print("display: none");}%>
+        }
+
+        #cerrar{
             <% if (login.getPersona_logueada() != 2 && login.getPersona_logueada() != 1) {out.print("display: none");}%>
         }
     </style>

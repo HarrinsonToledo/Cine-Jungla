@@ -53,6 +53,9 @@
         <a href="acceso.jsp"><button class="btn btn-danger my-2 my-sm-0" type="submit" <% if (login.getPersona_logueada() != 0) {out.print("style=\"display: none\"");}%>>Acceder</button></a>
         <img class="user" id="user" src="recursos/social-media.gif" width="50">
         <h4 class="user" style="color: white;"> <% if (nombre != null) { out.print(nombre[0]); }%> </h4>
+        <form class="cerrarSesion" action="hello-servlet">
+            <button name="cerrar-sesion" id="cerrar" value="cerrar" class="btn btn-danger my-2 my-sm-0" type="submit">Cerrar Sesion</button>
+        </form>
     </nav>
     <div id="main-container" class="container">
         <div class="row">
@@ -81,20 +84,21 @@
                         <button class="nav-link" id="fecha2-tab" data-toggle="tab" href="#fecha2" role="tab" aria-controls="fecha2" aria-selected="false">Fecha 2</button>
                         </li>*/%>
                 </ul>
+                <form action="hello-servlet">
                 <div class="tab-content" id="myTabContent">
-                    <%
-                        for (int i = 0; i < fechas.size(); i++) {
-                            out.print("<div class=\"tab-pane fade my-3\" id=\"" + fechas.get(i) + "\" role=\"tabpanel\" aria-labelledby=\"" + fechas.get(i) + "-tab\">\n" +
-                                    "       <div class=\"list-group\">");
-                            for (Funcion funcion : pelicula.getFuncionesPeli()) {
-                                if (funcion.getDia().equals(fechas.get(i))) {
-                                    out.print("<button href=\"#\" class=\"list-group-item list-group-item-action\">" + funcion.getHora() + " - Sala: "+ funcion.getCod_sala() +"</button>");
+                        <%
+                            for (int i = 0; i < fechas.size(); i++) {
+                                out.print("<div class=\"tab-pane fade my-3\" id=\"" + fechas.get(i) + "\" role=\"tabpanel\" aria-labelledby=\"" + fechas.get(i) + "-tab\">\n" +
+                                        "       <div class=\"list-group\">");
+                                for (Funcion funcion : pelicula.getFuncionesPeli()) {
+                                    if (funcion.getDia().equals(fechas.get(i))) {
+                                        out.print("<button name=\"funcion\" value=\"" + funcion.getId_funcion() + "\" class=\"list-group-item list-group-item-action\">" + funcion.getHora() + " - Sala: "+ funcion.getCod_sala() +"</button>");
+                                    }
                                 }
+                                out.print("</div>\n" +
+                                        "</div>");
                             }
-                            out.print("</div>\n" +
-                                    "</div>");
-                        }
-                    %>
+                        %>
                     <%/*<div class="tab-pane fade my-3" id="fecha" role="tabpanel" aria-labelledby="fecha-tab">
                         <div class="list-group">
                             <button href="#" class="list-group-item list-group-item-action">Horario 1 fecha 1</button>
@@ -108,6 +112,7 @@
                         </div>
                     </div>*/%>
                 </div>
+                </form>
 
             </div>
         </div>
@@ -115,6 +120,10 @@
     </div>
     <style>
         .user{
+        <% if (login.getPersona_logueada() != 2 && login.getPersona_logueada() != 1) {out.print("display: none");}%>
+        }
+
+        #cerrar{
         <% if (login.getPersona_logueada() != 2 && login.getPersona_logueada() != 1) {out.print("display: none");}%>
         }
     </style>

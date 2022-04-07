@@ -1,22 +1,24 @@
 package app.java.cinejungla;
 
 import app.java.cinejungla.ContenidoMultiplex.PuntosCineJungla;
+import app.java.cinejungla.ContenidoMultiplex.Sala.SalaFuncion;
+import app.java.cinejungla.ContenidoMultiplex.Sala.Silla;
+import app.java.cinejungla.ContenidoMultiplex.infoUnitaria.Funcion;
 import app.java.cinejungla.ContenidoMultiplex.infoUnitaria.Pelicula.ListadoPeliculas;
 import app.java.cinejungla.ContenidoMultiplex.infoUnitaria.Pelicula.Pelicula;
 import app.java.cinejungla.ContenidoMultiplex.infoUnitaria.Pelicula.SelectPelicula;
-import app.java.cinejungla.PaginaState.Estados.InicioState;
-import app.java.cinejungla.PaginaState.Estados.LoginState;
-import app.java.cinejungla.PaginaState.Estados.MultiplexState;
-import app.java.cinejungla.PaginaState.Estados.PeliculaState;
+import app.java.cinejungla.PaginaState.Estados.*;
 import app.java.cinejungla.PaginaState.Pagina;
 import app.java.cinejungla.infoPersona.Clientes.SelectCliente;
 import app.java.cinejungla.infoPersona.Login;
+import app.java.cinejungla.infoPersona.RegistrarCliente;
 import app.java.cinejungla.infoPersona.Usuarios.SelectUsuario;
 
 import java.io.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
+import javax.swing.*;
 
 /**
  *
@@ -27,7 +29,6 @@ import javax.servlet.annotation.*;
 
 @WebServlet(name = "helloServlet", value = "/hello-servlet")
 public class HelloServlet extends HttpServlet {
-    private int stateCliente;
     //---------
     private Comands comando;
     //---------
@@ -39,11 +40,18 @@ public class HelloServlet extends HttpServlet {
     private LoginState loginState;
     private InicioState inicioState;
     private PeliculaState peliculaState;
+    private RegClienteState regClienteState;
+    private SalaState salaState;
+    private SnackState snackState;
     //---------
     private ListadoPeliculas list;
     private SelectPelicula selectPelicula;
     //---------
     private Login inicioSecion;
+    //---------
+    private RegistrarCliente registrarCliente;
+    //---------
+    private SalaFuncion salaFuncion;
 
     private void cargarInstacias() {
         comando = Comands.getInstance();
@@ -56,6 +64,11 @@ public class HelloServlet extends HttpServlet {
         selectPelicula = SelectPelicula.getInstance();
         pcj = PuntosCineJungla.getInstance();
         inicioSecion = Login.getInstance();
+        registrarCliente = RegistrarCliente.getInstance();
+        regClienteState = RegClienteState.getInstance();
+        salaState = SalaState.getInstance();
+        salaFuncion = SalaFuncion.getInstance();
+        snackState = SnackState.getInstance();
     }
 
     public void cambioPagina(String parametro) {
@@ -107,9 +120,8 @@ public class HelloServlet extends HttpServlet {
 
         if (request.getParameter("boton") != null) {
             cambioPagina(request.getParameter("boton"));
-        }
 
-        if (request.getParameter("boton-peli") != null) {
+        } else if (request.getParameter("boton-peli") != null) {
             for (Pelicula nombre : list.getPeliculas()) {
                 if (nombre.getNom_pelicula().equals(request.getParameter("boton-peli"))) {
                     selectPelicula.setNom_pelicula(nombre.getNom_pelicula());
@@ -121,13 +133,13 @@ public class HelloServlet extends HttpServlet {
             }
             pagina.setState(peliculaState);
             paginaUsuario.setState(peliculaState);
-        }
 
-        if (request.getParameter("boton-login") != null) {
+        } else if (request.getParameter("boton-login") != null) {
             switch (request.getParameter("boton-login")) {
                 case "login-usuarios":
                     if (inicioSecion.loginUsuario(Integer.parseInt(request.getParameter("codigo")), request.getParameter("contraseña"))){
                         comando.setPersona_logueada(1);
+                        inicioSecion.loginCliente(1,"DESCONOCIDO");
                         cambioPagina(inicioSecion.multiplexUsuario());
                     } else {
                         comando.setPersona_logueada(3);
@@ -145,6 +157,64 @@ public class HelloServlet extends HttpServlet {
                         pagina.setState(loginState);
                     }
                     break;
+            }
+
+        } else if (request.getParameter("registrar") != null) {
+            int proceso = registrarCliente.insertar(request.getParameter("nombre"), Integer.parseInt(request.getParameter("cedula")), request.getParameter("contraseña"));
+
+            if (proceso == 2) {
+                comando.setPersona_logueada(2);
+                inicioSecion.loginCliente(Integer.parseInt(request.getParameter("cedula")), request.getParameter("contraseña"));
+                if (paginaUsuario.getActualState() != null ) {
+                    pagina.setState(paginaUsuario.getActualState());
+                }
+                proceso = 0;
+            } else {
+                pagina.setState(regClienteState);
+            }
+            comando.setRegistrar(proceso);
+
+        } else if (request.getParameter("cerrar-sesion") != null) {
+            inicioSecion.cerrarSesion(comando.getPersona_logueada());
+            comando.setPersona_logueada(0);
+            pagina.setState(inicioState);
+
+        } else if (request.getParameter("funcion") != null) {
+            for (Funcion funcion : selectPelicula.getFuncionesPeli()) {
+                if (funcion.getId_funcion() == Integer.parseInt(request.getParameter("funcion"))) {
+                    selectPelicula.setSelectFuncion(funcion);
+                    salaFuncion.setListado(funcion.getCod_sala());
+                    pagina.setState(salaState);
+                }
+            }
+        } else if (request.getParameter("boton-sala") != null) {
+            for (int i = 0; i < salaFuncion.getListado().size(); i++) {
+                if (salaFuncion.getListado().get(i).getEstado().equals("seleccionado")) {
+                    salaFuncion.getListado().get(i).setEstado("libre");
+                }
+            }
+
+            String[] array = request.getParameter("sillas").split("-");
+
+            if (array == null || array[0].equals("")) {
+                pagina.setState(salaState);
+            } else {
+
+                for (String cod: array) {
+                    JOptionPane.showMessageDialog(null,cod);
+                }
+                for (int i = 0; i < salaFuncion.getListado().size(); i++) {
+                    for (String cod: array) {
+                        if (cod.equals(salaFuncion.getListado().get(i).getCod_silla())) {
+                            salaFuncion.getListado().get(i).setEstado("seleccionado");
+                        }
+                    }
+                }
+                pagina.setState(snackState);
+
+                for (Silla s : salaFuncion.getListado()) {
+                    JOptionPane.showMessageDialog(null,s.getCod_silla() + ": " + s.getEstado());
+                }
             }
         }
 

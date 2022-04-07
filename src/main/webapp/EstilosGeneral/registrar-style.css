@@ -1,7 +1,7 @@
 body {
     font-family: 'Open Sans', sans-serif;
 
-    background-image: url("https://img.freepik.com/vector-gratis/formas-geometricas-abstractas-oro-rojo-sobre-fondo-blanco-adecuado-fondo-presentacion-banner-pagina-destino-web-interfaz-usuario-aplicacion-movil-diseno-editorial-volante-banner-otras-ocasiones-relacionadas_181182-14476.jpg");
+    background-image: url("http://www.solofondos.com/wp-content/uploads/2016/10/fondos-de-escritorio-hd-rojos.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     width: 100%;
@@ -22,13 +22,13 @@ body {
     width: 55%;
 }
 
-.centrar{
+h1, h5, h7{
     margin-top: 5%;
     text-align: center;
 }
 
 h7{
-    margin-left: 7%;
+    margin-left: 22%;
 }
 
 input{

@@ -2,10 +2,11 @@ package app.java.cinejungla;
 
 public class Comands {
 
-    public static Comands instance;
-    public int comando_multiplex = 1;
-    public int comando_login = 1;
-    public int persona_logueada = 0;
+    private static Comands instance;
+    private int comando_multiplex = 1;
+    private int comando_login = 1;
+    private int persona_logueada = 0;
+    private int registrar = 0;
 
     public Comands() {
 
@@ -33,6 +34,14 @@ public class Comands {
 
     public void setPersona_logueada(int persona_logueada) {
         this.persona_logueada = persona_logueada;
+    }
+
+    public int getRegistrar() {
+        return registrar;
+    }
+
+    public void setRegistrar(int registrar) {
+        this.registrar = registrar;
     }
 
     public static Comands getInstance() {

@@ -35,7 +35,13 @@ h4{
     margin-bottom:auto;
 }
 
-form{
+.cerrarSesion{
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 2%;
+}
+
+.multiplex{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);

@@ -23,6 +23,7 @@ public class Login {
     }
 
     public Boolean loginUsuario(int codigo, String password) {
+        selectUsuario = SelectUsuario.getInstance();
         for (Usuario u : listadoUsuarios.getListado()) {
             if (u.getCedula() == codigo && u.getContraseña().equals(password)) {
                 selectUsuario.setCedula(u.getCedula());
@@ -44,6 +45,7 @@ public class Login {
     }
 
     public Boolean loginCliente(int cedula, String password) {
+        selectCliente = SelectCliente.getInstance();
         for (Cliente c : listadoClientes.getListado()) {
             if (c.getCedula() == cedula && c.getContraseña().equals(password)) {
                 selectCliente.setCedula(c.getCedula());
@@ -54,6 +56,14 @@ public class Login {
             }
         }
         return false;
+    }
+
+    public void cerrarSesion(int tipo) {
+        if (tipo == 1) {
+            selectUsuario = null;
+        } else if (tipo == 2) {
+            selectCliente = null;
+        }
     }
 
     public static Login getInstance(){

@@ -22,6 +22,12 @@ body{
     border-radius:80%;
 }
 
+.cerrarSesion{
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 2%;
+}
+
 h4{
     margin-left:1%;
     margin-top:auto;
