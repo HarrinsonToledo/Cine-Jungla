@@ -6,10 +6,19 @@ import java.util.ArrayList;
 
 public class Pelicula {
 
+    public int id_pelicula;
     public String nom_pelicula;
     public String duracion;
     public String descripcion;
     public String imagen;
+
+    public int getId_pelicula() {
+        return id_pelicula;
+    }
+
+    public void setId_pelicula(int id_pelicula) {
+        this.id_pelicula = id_pelicula;
+    }
 
     public String getNom_pelicula() {
         return nom_pelicula;

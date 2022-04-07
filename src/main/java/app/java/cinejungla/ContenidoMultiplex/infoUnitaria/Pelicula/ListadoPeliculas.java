@@ -32,6 +32,7 @@ public class ListadoPeliculas {
             while (resultSet.next()) {
                 Pelicula pelicula = new Pelicula();
 
+                pelicula.setId_pelicula(resultSet.getInt("ID_PELICULA"));
                 pelicula.setNom_pelicula(resultSet.getString("NOM_PELICULA"));
                 pelicula.setDuracion(resultSet.getString("DURACION"));
                 pelicula.setDescripcion(resultSet.getString("DESCRIPCION"));

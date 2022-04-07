@@ -87,9 +87,22 @@ h3, h1{
     margin-top: 5%;
 }
 
+#omitir{
+    width:70%;
+    height: 5%;
+
+    margin-top: 5%;
+    margin-inline: auto;
+}
+
 #induviduales, #combos{
     display: none;
     text-align: center;
+}
+
+a{
+    text-decoration: none;
+    display: flex;
 }
 
 

@@ -1,0 +1,11 @@
+body{
+    background-color: rgb(56, 56, 56);
+}
+
+.col-10{
+    background-color: rgb(255, 255, 255);
+}
+
+#botones{
+    max-width: 800px !important;
+}
