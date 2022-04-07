@@ -7,6 +7,8 @@ public class Comands {
     private int comando_login = 1;
     private int persona_logueada = 0;
     private int registrar = 0;
+    private int prevencion = 0;
+    private int compraConfiteria = 0;
 
     public Comands() {
 
@@ -42,6 +44,22 @@ public class Comands {
 
     public void setRegistrar(int registrar) {
         this.registrar = registrar;
+    }
+
+    public int getPrevencion() {
+        return prevencion;
+    }
+
+    public void setPrevencion(int prevencion) {
+        this.prevencion = prevencion;
+    }
+
+    public int getCompraConfiteria() {
+        return compraConfiteria;
+    }
+
+    public void setCompraConfiteria(int compraConfiteria) {
+        this.compraConfiteria = compraConfiteria;
     }
 
     public static Comands getInstance() {

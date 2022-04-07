@@ -26,13 +26,13 @@
     fechas.addAll(hashSet);
 
     String[] nombre = null;
-    Comands login = Comands.getInstance();
+    Comands comands = Comands.getInstance();
     SelectUsuario usuario = SelectUsuario.getInstance();
     SelectCliente cliente = SelectCliente.getInstance();
 
-    if (login.getPersona_logueada() == 1) {
+    if (comands.getPersona_logueada() == 1) {
         nombre = usuario.getNombre().split(" ");
-    } else if (login.getPersona_logueada() == 2) {
+    } else if (comands.getPersona_logueada() == 2) {
         nombre = cliente.getNombre().split(" ");
     }
 %>
@@ -49,8 +49,8 @@
 <body>
     <nav class="navbar navbar-dark bg-dark mb-0 px-5" id="nav-bar">
         <img src="recursos/solo-logo.png" width="100">
-        <a href="<%if (login.getPersona_logueada() == 2) {out.print("index.jsp");} else {out.print("#");}%>" style="margin-right: auto"><h2 style="color: white"><b>Cine Jungla</b></h2></a>
-        <a href="acceso.jsp"><button class="btn btn-danger my-2 my-sm-0" type="submit" <% if (login.getPersona_logueada() != 0) {out.print("style=\"display: none\"");}%>>Acceder</button></a>
+        <a href="<%if (comands.getPersona_logueada() == 2) {out.print("index.jsp");} else {out.print("#");}%>" style="margin-right: auto"><h2 style="color: white"><b>Cine Jungla</b></h2></a>
+        <a href="acceso.jsp"><button class="btn btn-danger my-2 my-sm-0" type="submit" <% if (comands.getPersona_logueada() != 0) {out.print("style=\"display: none\"");}%>>Acceder</button></a>
         <img class="user" id="user" src="recursos/social-media.gif" width="50">
         <h4 class="user" style="color: white;"> <% if (nombre != null) { out.print(nombre[0]); }%> </h4>
         <form class="cerrarSesion" action="hello-servlet">
@@ -120,13 +120,21 @@
     </div>
     <style>
         .user{
-        <% if (login.getPersona_logueada() != 2 && login.getPersona_logueada() != 1) {out.print("display: none");}%>
+        <% if (comands.getPersona_logueada() != 2 && comands.getPersona_logueada() != 1) {out.print("display: none");}%>
         }
 
         #cerrar{
-        <% if (login.getPersona_logueada() != 2 && login.getPersona_logueada() != 1) {out.print("display: none");}%>
+        <% if (comands.getPersona_logueada() != 2 && comands.getPersona_logueada() != 1) {out.print("display: none");}%>
         }
     </style>
+    <%
+        if (comands.getPrevencion() == 1) {
+            out.print("<script>\n" +
+                    "        alert(\"Por favor iniciar sesion antes de acceder a nuestros servicios\")\n" +
+                    "    </script>");
+            comands.setPrevencion(0);
+        }
+    %>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

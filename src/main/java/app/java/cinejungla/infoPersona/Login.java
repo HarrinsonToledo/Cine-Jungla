@@ -43,8 +43,13 @@ public class Login {
     public String multiplexUsuario() {
         return selectUsuario.getMultiplex();
     }
+    public String cargoUsuario() { return selectUsuario.getCargo(); }
 
     public Boolean loginCliente(int cedula, String password) {
+        if (cedula == 1 && password.equals("DESCONOCIDO")) {
+            return false;
+        }
+
         selectCliente = SelectCliente.getInstance();
         for (Cliente c : listadoClientes.getListado()) {
             if (c.getCedula() == cedula && c.getContraseña().equals(password)) {

@@ -1,0 +1,27 @@
+body{
+    background-color: rgb(56, 56, 56);
+}
+
+.col-10{
+    background-color: rgb(255, 255, 255);
+}
+#lista{
+    overflow-y: scroll !important;
+    overflow-x: auto !important;
+    max-height: 50vh !important;
+}
+
+.cerrarSesion{
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 2%;
+}
+
+#user{
+    border-radius:80%;
+    margin-left:auto;
+}
+
+img{
+    margin-right:2%;
+}

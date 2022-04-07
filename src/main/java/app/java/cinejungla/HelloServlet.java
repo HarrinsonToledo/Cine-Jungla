@@ -1,5 +1,8 @@
 package app.java.cinejungla;
 
+import app.java.cinejungla.ContenidoMultiplex.Confiteria.CompraSnacks;
+import app.java.cinejungla.ContenidoMultiplex.Confiteria.ListadoSnacks;
+import app.java.cinejungla.ContenidoMultiplex.Confiteria.Snack;
 import app.java.cinejungla.ContenidoMultiplex.PuntosCineJungla;
 import app.java.cinejungla.ContenidoMultiplex.Sala.SalaFuncion;
 import app.java.cinejungla.ContenidoMultiplex.Sala.Silla;
@@ -7,6 +10,7 @@ import app.java.cinejungla.ContenidoMultiplex.infoUnitaria.Funcion;
 import app.java.cinejungla.ContenidoMultiplex.infoUnitaria.Pelicula.ListadoPeliculas;
 import app.java.cinejungla.ContenidoMultiplex.infoUnitaria.Pelicula.Pelicula;
 import app.java.cinejungla.ContenidoMultiplex.infoUnitaria.Pelicula.SelectPelicula;
+import app.java.cinejungla.GuardarFactura.FacturaPagada;
 import app.java.cinejungla.PaginaState.Estados.*;
 import app.java.cinejungla.PaginaState.Pagina;
 import app.java.cinejungla.infoPersona.Clientes.SelectCliente;
@@ -43,6 +47,8 @@ public class HelloServlet extends HttpServlet {
     private RegClienteState regClienteState;
     private SalaState salaState;
     private SnackState snackState;
+    private FacturaState facturaState;
+    private AdminState adminState;
     //---------
     private ListadoPeliculas list;
     private SelectPelicula selectPelicula;
@@ -52,6 +58,11 @@ public class HelloServlet extends HttpServlet {
     private RegistrarCliente registrarCliente;
     //---------
     private SalaFuncion salaFuncion;
+    //---------
+    private ListadoSnacks listadoSnacks;
+    private CompraSnacks compraSnacks;
+    //---------
+    private FacturaPagada facturaPagada;
 
     private void cargarInstacias() {
         comando = Comands.getInstance();
@@ -69,6 +80,11 @@ public class HelloServlet extends HttpServlet {
         salaState = SalaState.getInstance();
         salaFuncion = SalaFuncion.getInstance();
         snackState = SnackState.getInstance();
+        facturaState = FacturaState.getInstance();
+        adminState = AdminState.getInstance();
+        listadoSnacks = ListadoSnacks.getInstance();
+        compraSnacks = CompraSnacks.getInstance();
+        facturaPagada = FacturaPagada.getInstance();
     }
 
     public void cambioPagina(String parametro) {
@@ -124,6 +140,7 @@ public class HelloServlet extends HttpServlet {
         } else if (request.getParameter("boton-peli") != null) {
             for (Pelicula nombre : list.getPeliculas()) {
                 if (nombre.getNom_pelicula().equals(request.getParameter("boton-peli"))) {
+                    selectPelicula.setId_pelicula(nombre.getId_pelicula());
                     selectPelicula.setNom_pelicula(nombre.getNom_pelicula());
                     selectPelicula.setDuracion(nombre.getDuracion());
                     selectPelicula.setDescripcion(nombre.getDescripcion());
@@ -139,8 +156,12 @@ public class HelloServlet extends HttpServlet {
                 case "login-usuarios":
                     if (inicioSecion.loginUsuario(Integer.parseInt(request.getParameter("codigo")), request.getParameter("contraseña"))){
                         comando.setPersona_logueada(1);
-                        inicioSecion.loginCliente(1,"DESCONOCIDO");
-                        cambioPagina(inicioSecion.multiplexUsuario());
+                        if (inicioSecion.cargoUsuario().equals("Director")) {
+                            pagina.setState(adminState);
+                        } else {
+                            inicioSecion.loginCliente(1,"DESCONOCIDO");
+                            cambioPagina(inicioSecion.multiplexUsuario());
+                        }
                     } else {
                         comando.setPersona_logueada(3);
                         pagina.setState(loginState);
@@ -180,11 +201,16 @@ public class HelloServlet extends HttpServlet {
             pagina.setState(inicioState);
 
         } else if (request.getParameter("funcion") != null) {
-            for (Funcion funcion : selectPelicula.getFuncionesPeli()) {
-                if (funcion.getId_funcion() == Integer.parseInt(request.getParameter("funcion"))) {
-                    selectPelicula.setSelectFuncion(funcion);
-                    salaFuncion.setListado(funcion.getCod_sala());
-                    pagina.setState(salaState);
+            if (comando.getPersona_logueada() == 0) {
+                comando.setPrevencion(1);
+                pagina.setState(paginaUsuario.getActualState());
+            } else {
+                for (Funcion funcion : selectPelicula.getFuncionesPeli()) {
+                    if (funcion.getId_funcion() == Integer.parseInt(request.getParameter("funcion"))) {
+                        selectPelicula.setSelectFuncion(funcion);
+                        salaFuncion.setListado(funcion.getCod_sala());
+                        pagina.setState(salaState);
+                    }
                 }
             }
         } else if (request.getParameter("boton-sala") != null) {
@@ -199,10 +225,6 @@ public class HelloServlet extends HttpServlet {
             if (array == null || array[0].equals("")) {
                 pagina.setState(salaState);
             } else {
-
-                for (String cod: array) {
-                    JOptionPane.showMessageDialog(null,cod);
-                }
                 for (int i = 0; i < salaFuncion.getListado().size(); i++) {
                     for (String cod: array) {
                         if (cod.equals(salaFuncion.getListado().get(i).getCod_silla())) {
@@ -211,11 +233,27 @@ public class HelloServlet extends HttpServlet {
                     }
                 }
                 pagina.setState(snackState);
+            }
+        } else if (request.getParameter("boton-snack") != null) {
+            String id = "";
 
-                for (Silla s : salaFuncion.getListado()) {
-                    JOptionPane.showMessageDialog(null,s.getCod_silla() + ": " + s.getEstado());
+            for (Snack snack : listadoSnacks.getListado()) {
+                id = "" + snack.getId_snack();
+
+                JOptionPane.showMessageDialog(null, request.getParameter(id));
+                JOptionPane.showMessageDialog(null, snack.getId_snack());
+
+                if (request.getParameter(id) == null || request.getParameter(id).equals("")) {
+                } else {
+                    snack.setCantidad(Integer.parseInt(request.getParameter(id)));
+                    compraSnacks.setListado(snack);
+                    comando.setCompraConfiteria(1);
+                    pagina.setState(facturaState);
                 }
             }
+        } else if (request.getParameter("pagar") != null) {
+            facturaPagada.guardar();
+            pagina.setState(multiplexState);
         }
 
         request.getRequestDispatcher(pagina.getPagina()).forward(request,response);
